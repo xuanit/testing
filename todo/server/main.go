@@ -14,6 +14,7 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/xuanit/testing/todo/server/service/todo"
+	repository "github.com/xuanit/testing/todo/server/repository"
 	pb "github.com/xuanit/testing/todo/pb" // Update
 )
 
@@ -43,7 +44,8 @@ func run() error {
 
 
 	s := grpc.NewServer()
-	pb.RegisterTodoServiceServer(s, todo.Service{DB: db})
+	todoRep := repository.ToDoImpl{DB: db}
+	pb.RegisterTodoServiceServer(s, todo.Service{ToDoRepo: todoRep})
 
 	lis, err := net.Listen("tcp", grpcAddress)
 	if err != nil {

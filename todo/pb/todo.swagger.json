@@ -69,81 +69,6 @@
         "tags": [
           "TodoService"
         ]
-      },
-      "put": {
-        "operationId": "UpdateTodo",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1UpdateTodoResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1Todo"
-            }
-          }
-        ],
-        "tags": [
-          "TodoService"
-        ]
-      }
-    },
-    "/v1/todo/bulk": {
-      "post": {
-        "summary": "Bulk version of CreateTodo",
-        "operationId": "CreateTodos",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1CreateTodosResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1CreateTodosRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TodoService"
-        ]
-      },
-      "put": {
-        "operationId": "UpdateTodos",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1UpdateTodosResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1UpdateTodosRequest"
-            }
-          }
-        ],
-        "tags": [
-          "TodoService"
-        ]
       }
     },
     "/v1/todo/{id}": {
@@ -202,28 +127,6 @@
         }
       }
     },
-    "v1CreateTodosRequest": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Todo"
-          }
-        }
-      }
-    },
-    "v1CreateTodosResponse": {
-      "type": "object",
-      "properties": {
-        "ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "v1DeleteTodoResponse": {
       "type": "object"
     },
@@ -274,23 +177,6 @@
           "title": "@inject_tag: sql:\"type:timestamptz\""
         }
       }
-    },
-    "v1UpdateTodoResponse": {
-      "type": "object"
-    },
-    "v1UpdateTodosRequest": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Todo"
-          }
-        }
-      }
-    },
-    "v1UpdateTodosResponse": {
-      "type": "object"
     }
   }
 }

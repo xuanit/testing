@@ -15,14 +15,6 @@ service TodoService {
 		};
   }
 
-  // Bulk version of CreateTodo
-  rpc CreateTodos(CreateTodosRequest) returns (CreateTodosResponse) {
-    option (google.api.http) ={
-			post: "/v1/todo/bulk"
-			body: "*"
-		};
-  }
-
   rpc GetTodo(GetTodoRequest) returns (GetTodoResponse) {
     option (google.api.http) ={
 			get: "/v1/todo/{id}"
@@ -38,20 +30,6 @@ service TodoService {
   rpc DeleteTodo(DeleteTodoRequest) returns (DeleteTodoResponse) {
     option (google.api.http) ={
 			delete: "/v1/todo/{id}"
-		};
-  }
-
-  rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse) {
-    option (google.api.http) ={
-			put: "/v1/todo"
-			body: "item"
-		};
-  }
-
-  rpc UpdateTodos(UpdateTodosRequest) returns (UpdateTodosResponse) {
-    option (google.api.http) ={
-			put: "/v1/todo/bulk"
-			body: "*"
 		};
   }
 }
@@ -79,14 +57,6 @@ message CreateTodoResponse {
   string id = 1;
 }
 
-message CreateTodosRequest {
-  repeated Todo items = 1;
-}
-
-message CreateTodosResponse {
-  repeated string ids = 1;
-}
-
 message GetTodoRequest {
   string id = 1;
 }
@@ -109,15 +79,3 @@ message DeleteTodoRequest {
 }
 
 message DeleteTodoResponse {}
-
-message UpdateTodoRequest {
-  Todo item = 1;
-}
-
-message UpdateTodoResponse {}
-
-message UpdateTodosRequest {
-  repeated Todo items = 1;
-}
-
-message UpdateTodosResponse {}
