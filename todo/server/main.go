@@ -13,7 +13,7 @@ import (
 	grpc_runtime "github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
 
-	"github.com/xuanit/testing/todo/server/service/todo"
+	"github.com/xuanit/testing/todo/server/service"
 	repository "github.com/xuanit/testing/todo/server/repository"
 	pb "github.com/xuanit/testing/todo/pb" // Update
 )
@@ -45,11 +45,11 @@ func run() error {
 
 	s := grpc.NewServer()
 	todoRep := repository.ToDoImpl{DB: db}
-	pb.RegisterTodoServiceServer(s, todo.Service{ToDoRepo: todoRep})
+	pb.RegisterTodoServiceServer(s, service.ToDo{ToDoRepo: todoRep})
 
 	lis, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
-		return fmt.Errorf("can not listen tcp grpcAddress %d: %v", grpcAddress, err)
+		return fmt.Errorf("can not listen tcp grpcAddress %s: %v", grpcAddress, err)
 	}
 	go s.Serve(lis)
 

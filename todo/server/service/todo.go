@@ -1,4 +1,4 @@
-package todo
+package service
 
 import (
 	"context"
@@ -9,15 +9,15 @@ import (
 	"google.golang.org/grpc/codes"
 )
 
-// Service is the service dealing with storing
+// ToDo is the service dealing with storing
 // and retrieving pb items from the database.
-type Service struct {
+type ToDo struct {
 	//DB *pg.DB
 	ToDoRepo repository.ToDo
 }
 
 // CreateTodo creates a pb given a description
-func (s Service) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest) (*pb.CreateTodoResponse, error) {
+func (s ToDo) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest) (*pb.CreateTodoResponse, error) {
 	id, _ := uuid.NewV4()
 	req.Item.Id = id.String()
 	err := s.ToDoRepo.Insert(req.Item)
@@ -28,7 +28,7 @@ func (s Service) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest) (*pb
 }
 
 // GetTodo retrieves a pb item from its ID
-func (s Service) GetTodo(ctx context.Context, req *pb.GetTodoRequest) (*pb.GetTodoResponse, error) {
+func (s ToDo) GetTodo(ctx context.Context, req *pb.GetTodoRequest) (*pb.GetTodoResponse, error) {
 	item, err := s.ToDoRepo.Get(req.Id)
 	if err != nil {
 		return nil, grpc.Errorf(codes.NotFound, "Could not retrieve item from the database: %s", err)
@@ -37,7 +37,7 @@ func (s Service) GetTodo(ctx context.Context, req *pb.GetTodoRequest) (*pb.GetTo
 }
 
 // ListTodo retrieves a pb item from its ID
-func (s Service) ListTodo(ctx context.Context, req *pb.ListTodoRequest) (*pb.ListTodoResponse, error) {
+func (s ToDo) ListTodo(ctx context.Context, req *pb.ListTodoRequest) (*pb.ListTodoResponse, error) {
 	var items []*pb.Todo
 	items, err := s.ToDoRepo.List(req.Limit, req.NotCompleted)
 	if err != nil {
@@ -47,7 +47,7 @@ func (s Service) ListTodo(ctx context.Context, req *pb.ListTodoRequest) (*pb.Lis
 }
 
 // DeleteTodo deletes a pb given an ID
-func (s Service) DeleteTodo(ctx context.Context, req *pb.DeleteTodoRequest) (*pb.DeleteTodoResponse, error) {
+func (s ToDo) DeleteTodo(ctx context.Context, req *pb.DeleteTodoRequest) (*pb.DeleteTodoResponse, error) {
 	err := s.ToDoRepo.Delete(req.Id)
 	if err != nil {
 		return nil, grpc.Errorf(codes.Internal, "Could not delete item from the database: %s", err)

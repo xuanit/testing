@@ -1,4 +1,4 @@
-package todo
+package service
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -12,7 +12,7 @@ func TestGetToDo(t *testing.T)  {
 	toDo := &pb.Todo{}
 	req := &pb.GetTodoRequest{ Id: "123"}
 	mockToDoRep.On("Get", req.Id).Return(toDo, nil)
-	service := Service{ToDoRepo: mockToDoRep}
+	service := ToDo{ToDoRepo: mockToDoRep}
 
 	res, err := service.GetTodo(nil, req)
 
