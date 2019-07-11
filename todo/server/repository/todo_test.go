@@ -3,7 +3,7 @@ package repository
 import (
 	"github.com/go-pg/pg"
 	"github.com/stretchr/testify/suite"
-	"github.com/xuanit/testing/todo/pb" // Update
+	"github.com/xuanit/testing/todo/pb"
 	"testing"
 	"time"
 )
@@ -37,8 +37,7 @@ func (s *ToDoRepositorySuite) TearDownSuite() {
 }
 
 func (s *ToDoRepositorySuite)TestInsert()  {
-
-	item := &pb.Todo{ Id: "new_item4"}
+	item := &pb.Todo{ Id: "new_item", Title: "meeting"}
 	err := s.todoRep.Insert(item)
 
 	s.Nil(err)
