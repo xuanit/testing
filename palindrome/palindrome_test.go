@@ -19,6 +19,7 @@ func TestIsPalindrome(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			if IsPalindrome(tc.input) != tc.output {
+				t.Parallel()
 				t.Errorf("IsPalindrome(%s) != %t", tc.input, tc.output)
 			}
 		})
