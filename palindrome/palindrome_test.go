@@ -4,16 +4,16 @@ import (
 	"testing"
 )
 
-func TestIsPalindrome(t *testing.T)  {
-	testCases := []struct{
-		input string
+func TestIsPalindrome(t *testing.T) {
+	testCases := []struct {
+		input  string
 		output bool
 	}{
-	{"aa", true},
+		{"aa", true},
 		{"ábá", true},
 		{"Aba", true},
 		{"ab", false},
-		{ "Abc", false},
+		{"Abc", false},
 	}
 	for _, tc := range testCases {
 		if IsPalindrome(tc.input) != tc.output {
@@ -21,4 +21,3 @@ func TestIsPalindrome(t *testing.T)  {
 		}
 	}
 }
-
