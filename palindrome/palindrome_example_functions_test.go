@@ -4,10 +4,10 @@ import (
 	"fmt"
 )
 
-
-func ExampleIsPalindrome()  {
-	fmt.Printf("%t", IsPalindrome("aaaa"))
-	// go test will check output is printed into standard output
+func ExampleIsPalindrome() {
+	fmt.Printf("%t\n", IsPalindrome("aaaa"))
+	fmt.Printf("%t\n", IsPalindrome("aaac"))
 	// Output:
 	// true
+	// false
 }
