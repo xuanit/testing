@@ -6,18 +6,22 @@ import (
 
 func TestIsPalindrome(t *testing.T) {
 	testCases := []struct {
+		name   string
 		input  string
 		output bool
 	}{
-		{"aa", true},
-		{"ábá", true},
-		{"Aba", true},
-		{"ab", false},
-		{"Abc", false},
+		{"ShouldHandleAsciiPalindrome", "aa", true},
+		{"ShouldHandleAsciiNonPalindrome", "ab", false},
+		{"ShouldHandleUnicodePalindrome", "ábá", true},
+		{"ShouldHandlePalindromeWithUpperCase", "Aba", true},
+		{"shouldHandleNonPalindromeWithUpperCase", "Abc", false},
 	}
 	for _, tc := range testCases {
-		if IsPalindrome(tc.input) != tc.output {
-			t.Errorf("IsPalindrome(%s) != %t", tc.input, tc.output)
-		}
+		t.Run(tc.name, func(t *testing.T) {
+			if IsPalindrome(tc.input) != tc.output {
+				t.Errorf("IsPalindrome(%s) != %t", tc.input, tc.output)
+			}
+		})
+
 	}
 }
