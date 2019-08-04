@@ -18,5 +18,11 @@ run:
 	docker-compose up -d
 	go run ./server/main.go
 
-integration-test:
-	docker-compose down && docker-compose up -d  && go test -count=1 -v -tags=integration ./...
+set-up-test-env:
+	docker-compose down && docker-compose up -d
+
+clean:
+	docker-compose down
+
+integration-test: set-up-test-env
+	 go test -count=1 -v -tags=integration ./...
