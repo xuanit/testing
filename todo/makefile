@@ -11,7 +11,7 @@ set-up:
 	export PATH=$(PATH):$(GOPATH)/bin
 
 generate:
-	go generate --all
+	go generate ./...
 
 run:
 	docker-compose down
