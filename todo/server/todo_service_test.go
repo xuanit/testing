@@ -87,7 +87,7 @@ func TestToDoService(t *testing.T) {
 		StateHandlers: types.StateHandlers{
 			// Setup any state required by the test
 			// in this case, we ensure there is a "user" in the system
-			"User foo exists": func() error {
+			"state handler": func() error {
 				//lastName = "crickets"
 				return nil
 			},
