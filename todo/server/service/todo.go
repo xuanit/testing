@@ -2,7 +2,8 @@ package service
 
 import (
 	"context"
-	"github.com/satori/go.uuid"
+
+	uuid "github.com/satori/go.uuid"
 	"github.com/xuanit/testing/todo/pb"
 	"github.com/xuanit/testing/todo/server/repository"
 	"google.golang.org/grpc"

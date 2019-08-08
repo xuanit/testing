@@ -1,0 +1,42 @@
+{
+  "consumer": {
+    "name": "ToDoConsumer"
+  },
+  "provider": {
+    "name": "ToDoService"
+  },
+  "interactions": [
+    {
+      "description": "A request to create todo",
+      "request": {
+        "method": "POST",
+        "path": "/v1/todo",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "do homework"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": "string"
+        },
+        "matchingRules": {
+          "$.body.id": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
