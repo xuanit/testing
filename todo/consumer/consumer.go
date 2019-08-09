@@ -10,7 +10,7 @@ import (
 )
 
 type ToDo struct {
-	Id          string               `json:"id,omitempty"`
+	Id          string               `json:"id,omitempty" `
 	Title       string               `json:"title,omitempty"`
 	Description string               `json:"description,omitempty"`
 	Completed   bool                 `json:"completed,omitempty"`
@@ -21,6 +21,10 @@ type ToDo struct {
 type ToDoProxy struct {
 	Host string
 	Port int
+}
+
+type ToDoList struct {
+	Items []ToDo `json:"items"`
 }
 
 func (p *ToDoProxy) getApi() string {
@@ -43,4 +47,16 @@ func (p *ToDoProxy) CreateToDo(todo ToDo) (string, error) {
 
 	res.Body.Close()
 	return createToDoRes.ID, nil
+}
+
+func (p *ToDoProxy) ListToDo(limit int32, notCompleted bool) (*ToDoList, error) {
+	url := fmt.Sprintf("%s/todo?limit=%d&not_completed=%t", p.getApi(), limit, notCompleted)
+	req, _ := http.NewRequest(http.MethodGet, url, nil)
+
+	res, _ := http.DefaultClient.Do(req)
+	toDos := ToDoList{}
+	json.NewDecoder(res.Body).Decode(toDos)
+
+	res.Body.Close()
+	return &toDos, nil
 }

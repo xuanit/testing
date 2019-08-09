@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 
 	uuid "github.com/satori/go.uuid"
 	"github.com/xuanit/testing/todo/pb"
@@ -41,6 +42,7 @@ func (s ToDo) GetTodo(ctx context.Context, req *pb.GetTodoRequest) (*pb.GetTodoR
 func (s ToDo) ListTodo(ctx context.Context, req *pb.ListTodoRequest) (*pb.ListTodoResponse, error) {
 	var items []*pb.Todo
 	items, err := s.ToDoRepo.List(req.Limit, req.NotCompleted)
+	fmt.Printf("------------- List TODO  %v------\n", items)
 	if err != nil {
 		return nil, grpc.Errorf(codes.NotFound, "Could not list items from the database: %s", err)
 	}

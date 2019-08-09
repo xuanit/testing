@@ -34,6 +34,59 @@
           }
         }
       }
+    },
+    {
+      "description": "A request to list todo",
+      "providerState": "There are todo A and todo B",
+      "request": {
+        "method": "GET",
+        "path": "/v1/todo",
+        "query": "limit=3&not_completed=true"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "items": [
+            {
+              "id": "id1",
+              "title": "ToDo A"
+            },
+            {
+              "id": "id2",
+              "title": "ToDo B"
+            }
+          ]
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          },
+          "$.body.items": {
+            "match": "type"
+          },
+          "$.body.items[0]": {
+            "match": "type"
+          },
+          "$.body.items[0].id": {
+            "match": "type"
+          },
+          "$.body.items[0].title": {
+            "match": "type"
+          },
+          "$.body.items[1]": {
+            "match": "type"
+          },
+          "$.body.items[1].id": {
+            "match": "type"
+          },
+          "$.body.items[1].title": {
+            "match": "type"
+          }
+        }
+      }
     }
   ],
   "metadata": {
