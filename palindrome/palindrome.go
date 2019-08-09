@@ -1,16 +1,17 @@
 package palindrome
 
 import (
-"unicode"
+	"unicode"
 )
 
+// Check if a string is palindrome
 func IsPalindrome(s string) bool {
 	var runes []rune
-	for _ , r := range s {
+	for _, r := range s {
 		runes = append(runes, unicode.ToLower(r))
 	}
 	for i := range runes {
-		if runes[i] != runes[len(runes) - 1 -i] {
+		if runes[i] != runes[len(runes)-1-i] {
 			return false
 		}
 	}
