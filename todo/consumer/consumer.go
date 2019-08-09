@@ -27,13 +27,20 @@ func (p *ToDoProxy) getApi() string {
 	return fmt.Sprintf("http://%s:%d/v1", p.Host, p.Port)
 }
 
-func (p *ToDoProxy) CreateToDo(todo ToDo) error {
+func (p *ToDoProxy) CreateToDo(todo ToDo) (string, error) {
 	todo.Id = ""
-	toDoBytes, err := json.Marshal(todo)
+	toDoBytes, _ := json.Marshal(todo)
 
 	u := fmt.Sprintf("%s/todo", p.getApi())
 	req, _ := http.NewRequest("POST", u, bytes.NewBuffer(toDoBytes))
 	req.Header.Set("Content-Type", "application/json")
-	_, err = http.DefaultClient.Do(req)
-	return err
+	res, _ := http.DefaultClient.Do(req)
+
+	createToDoRes := struct {
+		ID string `json:"id"`
+	}{}
+	json.NewDecoder(res.Body).Decode(&createToDoRes)
+
+	res.Body.Close()
+	return createToDoRes.ID, nil
 }
