@@ -24,27 +24,27 @@ import (
 var grpcAddress = "localhost:5001"
 var httpAddress = "localhost:5002"
 
-type toDoImplMock struct {
+type toDoImplStub struct {
 }
 
-func (r toDoImplMock) List(limit int32, notCompleted bool) ([]*pb.Todo, error) {
+func (r toDoImplStub) List(limit int32, notCompleted bool) ([]*pb.Todo, error) {
 	return nil, nil
 }
 
-func (r toDoImplMock) Insert(items *pb.Todo) error {
+func (r toDoImplStub) Insert(items *pb.Todo) error {
 	return nil
 }
 
-func (r toDoImplMock) Get(id string) (*pb.Todo, error) {
+func (r toDoImplStub) Get(id string) (*pb.Todo, error) {
 	return nil, nil
 }
 
-func (r toDoImplMock) Delete(id string) error {
+func (r toDoImplStub) Delete(id string) error {
 	return nil
 }
 
 func startServer() {
-	todoRep := &toDoImplMock{}
+	todoRep := &toDoImplStub{}
 	s := grpc.NewServer()
 	pb.RegisterTodoServiceServer(s, service.ToDo{ToDoRepo: todoRep})
 
