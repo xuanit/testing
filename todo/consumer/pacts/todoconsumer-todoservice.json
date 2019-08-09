@@ -26,14 +26,10 @@
           "Content-Type": "application/json"
         },
         "body": {
-          "id": "string",
-          "title": "string"
+          "id": "id1"
         },
         "matchingRules": {
           "$.body.id": {
-            "match": "type"
-          },
-          "$.body.title": {
             "match": "type"
           }
         }

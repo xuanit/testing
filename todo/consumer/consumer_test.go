@@ -6,6 +6,8 @@ import (
 	"log"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/pact-foundation/pact-go/dsl"
 )
 
@@ -19,8 +21,7 @@ func TestCreateToDo(t *testing.T) {
 	defer pact.Teardown()
 
 	createToDoRes := struct {
-		id    string `json:"id", pact:"example=1"`
-		title string `json:"title"`
+		id string `json:"id" pact:"example=id1"`
 	}{}
 	// Set up our expected interactions.
 	pact.
@@ -46,10 +47,11 @@ func TestCreateToDo(t *testing.T) {
 	// Pass in test case. This is the component that makes the external HTTP call
 	var test = func() (err error) {
 		proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
-		err = proxy.CreateToDo(ToDo{Id: "1", Title: "1-1 with manager", Description: "discuss about OKRs", Completed: true})
+		id, err := proxy.CreateToDo(ToDo{Id: "1", Title: "1-1 with manager", Description: "discuss about OKRs", Completed: true})
 		if err != nil {
 			return err
 		}
+		assert.Equal(t, "id1", id)
 		return nil
 	}
 
