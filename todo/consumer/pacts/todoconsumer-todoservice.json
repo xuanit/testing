@@ -15,7 +15,9 @@
           "Content-Type": "application/json"
         },
         "body": {
-          "title": "do homework"
+          "completed": true,
+          "description": "discuss about OKRs",
+          "title": "1-1 with manager"
         }
       },
       "response": {
@@ -24,10 +26,14 @@
           "Content-Type": "application/json"
         },
         "body": {
-          "id": "string"
+          "id": "string",
+          "title": "string"
         },
         "matchingRules": {
           "$.body.id": {
+            "match": "type"
+          },
+          "$.body.title": {
             "match": "type"
           }
         }

@@ -19,7 +19,8 @@ func TestCreateToDo(t *testing.T) {
 	defer pact.Teardown()
 
 	createToDoRes := struct {
-		id string `json:"id", pact:"example=1"`
+		id    string `json:"id", pact:"example=1"`
+		title string `json:"title"`
 	}{}
 	// Set up our expected interactions.
 	pact.
@@ -30,8 +31,10 @@ func TestCreateToDo(t *testing.T) {
 			Method:  "POST",
 			Path:    dsl.String("/v1/todo"),
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
-			Body: map[string]string{
-				"title": "do homework",
+			Body: map[string]interface{}{
+				"title":       "1-1 with manager",
+				"description": "discuss about OKRs",
+				"completed":   true,
 			},
 		}).
 		WillRespondWith(dsl.Response{
@@ -43,7 +46,7 @@ func TestCreateToDo(t *testing.T) {
 	// Pass in test case. This is the component that makes the external HTTP call
 	var test = func() (err error) {
 		proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
-		err = proxy.CreateToDo(ToDo{Id: "1", Title: "do homework"})
+		err = proxy.CreateToDo(ToDo{Id: "1", Title: "1-1 with manager", Description: "discuss about OKRs", Completed: true})
 		if err != nil {
 			return err
 		}
