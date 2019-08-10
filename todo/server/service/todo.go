@@ -19,7 +19,7 @@ type ToDo struct {
 
 // CreateTodo creates a pb given a description
 func (s ToDo) CreateTodo(ctx context.Context, req *pb.CreateTodoRequest) (*pb.CreateTodoResponse, error) {
-	id, _ := uuid.NewV4()
+	id:= uuid.NewV4()
 	req.Item.Id = id.String()
 	err := s.ToDoRepo.Insert(req.Item)
 	if err != nil {
