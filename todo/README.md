@@ -5,5 +5,4 @@ go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 go get -u github.com/golang/protobuf/protoc-gen-go
 ```
 
-
-Pact Go for integration test https://github.com/pact-foundation/pact-go
+Please read Makefile for how to start the service and run tests
