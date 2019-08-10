@@ -21,14 +21,14 @@ import (
 	"google.golang.org/grpc"
 )
 
-var grpcAddress = "localhost:5001"
-var httpAddress = "localhost:5002"
+var grpcAddress = "localhost:5003"
+var httpAddress = "localhost:5004"
 
 type toDoImplStub struct {
 }
 
 func (r toDoImplStub) List(limit int32, notCompleted bool) ([]*pb.Todo, error) {
-	return nil, nil
+	return toDos, nil
 }
 
 func (r toDoImplStub) Insert(items *pb.Todo) error {
@@ -42,6 +42,8 @@ func (r toDoImplStub) Get(id string) (*pb.Todo, error) {
 func (r toDoImplStub) Delete(id string) error {
 	return nil
 }
+
+var toDos []*pb.Todo = []*pb.Todo{}
 
 func startServer() {
 	todoRep := &toDoImplStub{}
@@ -87,8 +89,8 @@ func TestToDoService(t *testing.T) {
 		StateHandlers: types.StateHandlers{
 			// Setup any state required by the test
 			// in this case, we ensure there is a "user" in the system
-			"state handler": func() error {
-				//lastName = "crickets"
+			"There are todo A and todo B": func() error {
+				toDos = []*pb.Todo{{Id: "id1", Title: "ToDo A"}, {Id: "id2", Title: "ToDo B"}}
 				return nil
 			},
 		},
