@@ -1,9 +1,9 @@
-#Requirements
+# Requirements
 * [Docker](https://docs.docker.com/install)
 * [Docker Compose](https://docs.docker.com/compose/)
 * [Go 1.11+](https://golang.org/project/)
 
-#Install
+# Install
 
 There are two ways to clone this repository:
 * Outside `GOPATH`
