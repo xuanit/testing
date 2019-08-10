@@ -1,3 +1,3 @@
-//go:generate  mockery -name ToDo
+//go:generate  $GOPATH/bin/mockery -name ToDo
 
 package repository
