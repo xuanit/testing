@@ -54,7 +54,7 @@ mkdir -p $GOPATH/src/github.com/xuanit
 git clone https://github.com/xuanit/testing.git $GOPATH/src/github.com/xuanit/testing
 ```
 
-### 4. Installing dependencies
+### 4. Installing dependencies locally (Optional)
 
 We love localizing project level dependencies so now we're going to download them using a go module utility.
 
