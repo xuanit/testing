@@ -68,3 +68,6 @@ We usually refer to this practice as **vendoring**, hence the name of the utilit
 ### 5. Run the tests
 
 TBD
+
+## Documents
+Slide and handout are provided [here](https://github.com/xuanit/testing/tree/master/docs)
